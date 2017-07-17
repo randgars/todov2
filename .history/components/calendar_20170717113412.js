@@ -3,6 +3,8 @@ import { width, height, totalSize } from 'react-native-dimension';
 import { View, FlatList, Text } from 'react-native';
 import Calendar from 'react-native-calendar';
 import moment from 'moment';
+
+
 export default class CalendarComponent extends React.Component {
   constructor(props) {
     super(props);

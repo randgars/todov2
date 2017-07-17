@@ -29,6 +29,7 @@ export default class Main extends React.Component {
     }
   }
   saveEventsList() {
+    debugger
     this.props.screenProps.actions.setDateEvents(this.props.screenProps.selectedDate, this.props.screenProps.list);
     // this.props.screenProps.datesEventsList;
   }

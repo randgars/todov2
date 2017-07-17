@@ -5,7 +5,6 @@ import { Constants } from 'expo';
 import Main from './main';
 import Calendar from './calendar';
 
-
 export default class App extends React.Component {
   constructor(props) {
     super(props);

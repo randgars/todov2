@@ -3,6 +3,7 @@ import { width, height, totalSize } from 'react-native-dimension';
 import { View, FlatList, Text } from 'react-native';
 import Calendar from 'react-native-calendar';
 import moment from 'moment';
+
 export default class CalendarComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -13,10 +14,11 @@ export default class CalendarComponent extends React.Component {
     this.displayList = this.displayList.bind(this);
   }
   onDateSelect(date) {
+    debugger
     let formatDate = moment(date).format('YYYY-MM-DD');
     this.props.screenProps.actions.getCalendarDate(formatDate);
     this.displayList(formatDate);
-    this.props.navigation.navigate('Events')
+    this.props.screenProps.navigation('Events')
   }
   displayList(formatDate) {
     for (let i = 0; i < this.props.screenProps.datesEventsList.length; i++) {
@@ -35,6 +37,7 @@ export default class CalendarComponent extends React.Component {
     }
   }
   render() {
+    debugger
     return (
       <View>
         <Calendar
@@ -45,7 +48,6 @@ export default class CalendarComponent extends React.Component {
           events={[{date:'2017-07-13'}]}
           onDateSelect={this.onDateSelect}
         />
-       
         {
           this.state.selectedDateEvents ?
           <FlatList

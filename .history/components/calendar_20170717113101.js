@@ -3,6 +3,9 @@ import { width, height, totalSize } from 'react-native-dimension';
 import { View, FlatList, Text } from 'react-native';
 import Calendar from 'react-native-calendar';
 import moment from 'moment';
+
+import { Container, Content, Badge, Text, Icon } from 'native-base';
+
 export default class CalendarComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -45,7 +48,13 @@ export default class CalendarComponent extends React.Component {
           events={[{date:'2017-07-13'}]}
           onDateSelect={this.onDateSelect}
         />
-       
+        <Container>
+          <Content>
+            <Badge>
+              <Text>2</Text>
+            </Badge>
+          </Content>
+        </Container>
         {
           this.state.selectedDateEvents ?
           <FlatList

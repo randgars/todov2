@@ -1,24 +1,22 @@
 import React from 'react';
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import TodoList from './todoList/todoList';
 import { StackNavigator  } from 'react-navigation';
+import { width, height, totalSize } from 'react-native-dimension';
 import { Constants } from 'expo';
 import Main from './main';
 import Calendar from './calendar';
-
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
   }
-  async componentWillMount() {
-      await Expo.Font.loadAsync({
-        'Roboto': require('native-base/Fonts/Roboto.ttf'),
-        'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
-      });
-  }
+  
   render() {
     return (
-      <MainScreenNavigator screenProps={this.props}/>
+      <View style={styles.container}>
+        <MainScreenNavigator screenProps={this.props}/>
+      </View>
     );
   }
 }
@@ -34,13 +32,9 @@ const MainScreenNavigator = StackNavigator (
     Events: {
       screen: Main,
       navigationOptions: {
-        title: 'Calendar'
+        title: 'Events'
       }
     }
-  },
-  {
-    initialRouteName: 'Calendar',
-    mode: Platform.OS === 'ios' ? 'modal' : 'card',
   }
 );
 
@@ -53,4 +47,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   }
 })
-

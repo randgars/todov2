@@ -5,6 +5,7 @@ import { Constants } from 'expo';
 import Main from './main';
 import Calendar from './calendar';
 
+import { Button} from 'native-base';
 
 export default class App extends React.Component {
   constructor(props) {

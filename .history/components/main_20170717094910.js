@@ -5,6 +5,9 @@ import { width, height, totalSize } from 'react-native-dimension';
 import moment from 'moment';
 
 export default class Main extends React.Component {
+  static navigationOptions = {
+    title: 'Events',
+  };
   constructor(props) {
     super(props);
     this.state = {
