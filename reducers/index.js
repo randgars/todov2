@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
-import listReducer from './listReducer'
 import calendarReducer from './calendarReducer'
+import loadFontsReducer from './loadFontsReducer'
 
 const rootReducer = combineReducers({
-    listReducer,
-    calendarReducer
+    calendarReducer,
+    loadFontsReducer
 })
 
 export default rootReducer

@@ -2,11 +2,11 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 import {
-  addItem,
   deleteItem,
   getCalendarDate,
   setDateEvents,
-  getSelectedDateEvents
+  getSelectedDateEvents,
+  loadFonts
 } from './actions/';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -23,34 +23,38 @@ class App extends React.Component {
 
 App.propTypes = {
   actions: PropTypes.shape({
-    addItem: PropTypes.func.isRequired,
     deleteItem: PropTypes.func.isRequired,
     getCalendarDate: PropTypes.func.isRequired,
     setDateEvents: PropTypes.func.isRequired,
-    getSelectedDateEvents: PropTypes.func.isRequired
+    getSelectedDateEvents: PropTypes.func.isRequired,
+    loadFonts: PropTypes.func.isRequired
   })
 };
 
 function mapStateToProps (state) {
   const props = {
-    list: state.listReducer.list,
     selectedDate: state.calendarReducer.date,
     datesEventsList: state.calendarReducer.datesEventsList,
-    selectedDateEvents: state.calendarReducer.selectedDateEvents
+    selectedDateEvents: state.calendarReducer.selectedDateEvents,
+    loadFonts: state.loadFontsReducer.loadFonts
   };
   return props;
 }
 
 function mapDispatchToProps (dispatch) {
   const actions = {
-    addItem,
     deleteItem,
     getCalendarDate,
     setDateEvents,
     getSelectedDateEvents
   };
-  const actionMap = { actions: bindActionCreators(actions, dispatch) };
-  return actionMap
+  let actionMap = { actions: bindActionCreators(actions, dispatch) };
+  const handlers = {
+    loadFonts: loadFonts.bind(this, dispatch)
+  };
+  actionMap.actions = Object.assign({}, actionMap.actions, handlers);
+
+  return actionMap;
 }
 
 export default connect(

@@ -1,6 +1,9 @@
-import { GET_CALENDAR_DATE, SET_DATE_EVENTS, GET_SELECTED_DATE_EVENTS } from '../actions/const'
+import { GET_CALENDAR_DATE, SET_DATE_EVENTS, GET_SELECTED_DATE_EVENTS, DELETE_ITEM } from '../actions/const'
+
+import moment from 'moment';
+
 const initialState = {
-  date: null,
+  date: moment().format('YYYY-MM-DD'),
   datesEventsList: [],
   selectedDateEvents: null
 }
@@ -29,6 +32,15 @@ export default function calendarReducer (state = initialState, action) {
       return {
         ...state,
         selectedDateEvents: action.selectedDateEvents
+      }
+    }
+
+    case DELETE_ITEM: {
+      let newList = Object.assign([], state.selectedDateEvents)
+      newList.splice(action.item, 1)
+      return {
+        ...state,
+        selectedDateEvents: newList
       }
     }
     

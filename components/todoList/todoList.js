@@ -1,5 +1,8 @@
 import React from 'react';
-import { StyleSheet, TextInput, FlatList, Text, View, Button, Vibration } from 'react-native';
+import { StyleSheet, TextInput, FlatList, View, Vibration } from 'react-native';
+
+
+import { Button, Icon, Text, List, ListItem } from 'native-base';
 
 export default class TodoList extends React.Component {
   constructor(props) {
@@ -7,28 +10,21 @@ export default class TodoList extends React.Component {
     this.taskDone = this.taskDone.bind(this);
   }
   taskDone(value) {
-    Vibration.vibrate([0, 500], false);
     this.props.actions.deleteItem(value);
   }
   render() {
     return (
       <View style={styles.listContainer}>
-        <FlatList
-          data={ this.props.selectedDateEvents && this.props.selectedDateEvents.map((item) => ({ key: item.event})) }
-          renderItem={({item, index}) => (
-            <View style={styles.listItemContainer} key={index} >
-              <View style={styles.itemTextContainer}>
-                <Text style={styles.item}>{`${index+1}. ${item.key}`}</Text>
-              </View>
-              <View style={styles.itemBtnContainer}>
-                <Button
-                  onPress={this.taskDone.bind(this, index)}
-                  title="done"
-                  color="#0091FF"
-                  accessibilityLabel="done"
-                />
-              </View>
-            </View>
+        <List
+          style={stylesS.list}
+          dataArray={ this.props.selectedDateEvents }
+          renderRow={(item, some, index) => (
+            <ListItem key={index} style={stylesS.listItem}>
+              <Text>{`${+index+1}. ${item.event}`}</Text>
+              <Button transparent light onPress={this.taskDone.bind(this, index)}>
+                <Icon name='md-close' style={stylesS.cloceIcon} />
+              </Button>
+            </ListItem>
           )}
         />
       </View>
@@ -36,32 +32,24 @@ export default class TodoList extends React.Component {
   }
 }
 
+const stylesS = {
+  listItem: {
+    justifyContent: 'space-between',
+    paddingTop: 0,
+    paddingBottom: 0,
+    marginLeft: 0,
+    paddingLeft: 15,
+    paddingRight: 0
+  },
+  cloceIcon: {
+    color: '#000'
+  }
+}
+
 const styles = StyleSheet.create({
   listContainer: {
     flex: 7,
     paddingTop: 20
-  },
-  item: {
-    fontSize: 20,
-    height: 44,
-    height: 'auto'
-  },
-  listItemContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: 10,
-    marginHorizontal: 5,
-    borderBottomWidth: 1,
-    borderBottomColor: '#0091FF',
-    paddingHorizontal: 20
-  },
-  itemTextContainer: {
-    flex: 3
-  },
-  itemBtnContainer: {
-    flex: 1
   }
 })
 
